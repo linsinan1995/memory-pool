@@ -1,11 +1,17 @@
-# memory-pool
-
+# Memory Pool
 A simple implementation of the memory pool, which can allocate memory for arbitrary size of object.
 
-# Run result
-
+# Build
 ```
-./test_memory_pool
+mkdir build && cd build
+cmake ..
+cmake --build . -j 4
+./memory_pool
+```
+
+# Run result
+```
+./memory_pool
 
 1. Allocate memory!
 sizeof(int) : 4
