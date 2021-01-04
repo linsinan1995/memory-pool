@@ -280,13 +280,23 @@ struct memory_pool {
 
     template <class Type>
     void deallocate(Type *ptr) {
+        ptr->~Type();
         unsigned long addr_value = memory_chunk::addr_to_ulong(ptr);
         auto chunk = this->get_dealloc_chunk(addr_value);
         chunk->deallocate(ptr);
     }
 
     void add_new_chunk(uint size) {
-        chunk_list.emplace_back(new memory_chunk(size));
+        auto p_chunk = new memory_chunk(size);
+
+        if (!chunk_list.empty() &&
+            memory_chunk::addr_to_ulong(chunk_list.back()->m_data) > memory_chunk::addr_to_ulong(p_chunk)) {
+            delete p_chunk;
+            panic_nptr("Error in memory addr! See the comment on get_dealloc_chunk\n");
+            return;
+        }
+
+        chunk_list.emplace_back(p_chunk);
     }
 
     void clean_fragment() {
