@@ -4,6 +4,9 @@ A simple implementation of the memory pool, which can allocate memory for arbitr
 
 # Run result
 
+```
+./test_memory_pool
+
 1. Allocate memory!
 sizeof(int) : 4
 addr of p_int : 0x7fd211402830
@@ -98,3 +101,5 @@ Available memory size:	 225 byte
 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14
 # # # # # # # # # # #  #  #  #  #|
 ==================================================
+
+```
